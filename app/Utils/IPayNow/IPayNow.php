@@ -1,11 +1,12 @@
 <?php
-namespace App\Utils;
+
+namespace App\Utils\IPayNow;
 
 /**
  * @author Jayzee Huang
  * @version 0.5
  */
-class IPayNow
+class IPayNow 
 {
     protected $endPoint = 'https://gapi.ipaynow.cn/global';
     protected $secretKey = 'yhmpArx0Pn7DqqFpuYErDoikNVRud78t';
@@ -33,13 +34,10 @@ class IPayNow
         "mhtSignature" => "",
     ];
 
-    /**
-     * @param String|string $value [description]
-     */
+
     public function setApiId(String $value)
     {
         $this->request['appId'] = $value;
-        return $this;
     }
 
     /**
@@ -60,6 +58,7 @@ class IPayNow
         return $this;
     }
 
+
     /**
      * @param String|string $value [description]
      */
@@ -69,6 +68,7 @@ class IPayNow
         return $this;
     }
 
+
     /**
      * @param String|string $value [description]
      */
@@ -77,6 +77,7 @@ class IPayNow
         $this->request['mhtOrderName'] = $value;
         return $this;
     }
+
 
     /**
      * @param String|string $value [description]
@@ -115,26 +116,22 @@ class IPayNow
     public function sdk()
     {
         $this->request['deviceType'] = '01';
-        return $this;
     }
 
     public function pc()
     {
         $this->request['deviceType'] = '02';
-        return $this;
     }
 
     public function scan($code)
     {
         $this->request['deviceType'] = '05';
         $this->request['channelAuthCode'] = $code;
-        return $this;
     }
 
     public function h5()
     {
         $this->request['deviceType'] = '06';
-        return $this;
     }
 
     /**
@@ -142,8 +139,7 @@ class IPayNow
      */
     public function Alipay()
     {
-        $this->request['payChannelType'] = 90;
-        return $this;
+        return $this->request['payChannelType'] = 90;
     }
 
     /**
@@ -152,8 +148,7 @@ class IPayNow
     public function WeChatPay()
     {
         $this->request['mhtSubAppId'] = 'wxc9e3984d74d0df9a';
-        $this->request['payChannelType'] = 80;
-        return $this;
+        return $this->request['payChannelType'] = 80;
     }
 
     /**
@@ -161,8 +156,7 @@ class IPayNow
      */
     public function sign()
     {
-        $this->request['mhtSignature'] = md5($this->joinString($this->request) . '&' . md5($this->secretKey));
-        return $this;
+        return $this->request['mhtSignature'] = md5($this->joinString($this->request) . '&' . md5($this->secretKey));
     }
 
     /**
@@ -192,7 +186,6 @@ class IPayNow
         foreach ($array as $item) {
             array_push($this->request['detail']['goods_detail'], ['good_name' => $item['name'], "quantity" => $item['quantity']]);
         }
-        return $this;
     }
 
     /**
@@ -227,7 +220,7 @@ class IPayNow
         $requestUrl = $this->endPoint . '?' . $this->joinRequest($this->request);
         return $requestUrl;
     }
-    
+
     public function verify(array $response)
     {
         ksort($response);
@@ -246,7 +239,7 @@ class IPayNow
     {
         return $this->joinRequest($this->request);
     }
-    
+
     public function debug()
     {
         echo json_encode($this->request);

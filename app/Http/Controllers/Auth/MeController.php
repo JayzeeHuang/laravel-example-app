@@ -1,12 +1,24 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\Controller;
+
 use App\Models\User;
 
-class UserController extends Controller
+use App\Jobs\ProcessStoreUser;
+use App\Http\Requests\UpdateUserRequest;
+
+class MeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        $this->user = Auth::guard()->user();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -30,18 +42,12 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        User::create($request->all());
-        $user = User::where('email', $request->input('email'))->first();
-        return response()
-            ->json([
-                'data' =>  $user,
-                'message' => 'user created'
-            ], 201);
+
     }
 
     /**
@@ -50,10 +56,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($email)
+    public function show()
     {
-        $user = User::where('email', $email)->first();
-        return  response()->json($user);
+        return  response()->json($this->user);
     }
 
     /**
@@ -74,11 +79,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $email)
+    public function update(UpdateUserRequest $request)
     {
-        $user = User::where('email', $email)->update($request->all());
-        $user = User::where('email', $email)->first();
-        return  response()->json($request);
+        $this->user->update($request->all());
+        return  response()->json($this->user);
     }
 
     /**
@@ -87,9 +91,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($email)
+    public function destroy()
     {
-        $deleted = User::where('email', $email)->delete();
-        return response()->json($deleted);
+        $this->user->delete();
+        return response()->json($this->user);
     }
 }

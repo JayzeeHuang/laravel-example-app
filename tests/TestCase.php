@@ -31,7 +31,7 @@ abstract class TestCase extends BaseTestCase
      */
     public function tearDown(): void
     {
-        Artisan::call('migrate:rollback');
+        // Artisan::call('migrate:rollback');
 
         parent::tearDown();
     }
