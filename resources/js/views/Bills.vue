@@ -464,7 +464,6 @@
                                                 <input
                                                     type="number"
                                                     step="0.01"
-                                                    value="0.00"
                                                     placeholder="0.00"
                                                     autocomplete="discount"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -482,7 +481,6 @@
                                                 <input
                                                     type="number"
                                                     step="0.01"
-                                                    value="0.00"
                                                     placeholder="0.00"
                                                     autocomplete="transaction_fee"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -502,7 +500,6 @@
                                                 <input
                                                     type="number"
                                                     step="0.01"
-                                                    value="0.00"
                                                     placeholder="0.00"
                                                     autocomplete="total"
                                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"

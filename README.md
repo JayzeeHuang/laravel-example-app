@@ -5,16 +5,20 @@ As an officer from the government sector, I would like to have a system to gener
 Based on user needs, this requires high concurrency. It is estimated that at the level of tens of millions, it will connect with third-party payment, user hierarchical authentication, and send bills by mail.
 
 toDo:
--Api design for App and Web.
--Email with Queues
--Payment wiht Queues
--Authentication with JWT, Role and Permission
+<ul>
+<li>Api design for App and Web</li>
+<li>Email with Queues</li>
+<li>Payment wiht Queues</li>
+<li>Authentication with JWT, Role and Permission</li>
+</ul>
 
-Would use feacture below:
--Routing Middleware Controllers HTTP Requests HTTP Responses Bundling Assets Validation 
--Collections Mail Queues Rate Limiting
-Authentication Authorization Hashing
--Database: Pagination Database: Migrations Database: Seeding
+Would use feactures below:
+<ul>
+<li>Routing Middleware Controllers HTTP Requests HTTP Responses Bundling Assets Validation </li>
+<li>Collections Mail Queues Rate Limiting</li>
+<li>Authentication Authorization Hashing</li>
+<li>Database: Pagination Database: Migrations Database: Seeding</li>
+</ul>
 
 Based on this design, it can theoretically handle 20,000 requests per second
 
@@ -26,22 +30,30 @@ First, cmd run
 ```
 composer install
 npm i
+cp .env.example .env
 ```
 Second
 ```
 php artisan key:generate
+php artisan jwt:secret
 ```
-Third, edit the `.env` file, fill the code below with your TESTING ENV config.
+Third, edit the `.env` file, fill your `TESTING ENV` config eg `DB_PASSWORD` and run the code below.
 
 ```
 php artisan migrate:refresh --seed
 ```
 or
-Depending on how much data you need, can jump to /database/seeders and modify the seeder.
+Depending on how much data you need, can jump to /database/seeders and modify the seeder.<br/>
+These functions have been optimized and can generate tens of millions of data in 6 minutes <br/>
+Please config your php.ini set the memory to -1 before you test
 ```
 php artisan db:seed --class=UsersSeeder
 php artisan db:seed --class=BillsSeeder
 php artisan db:seed --class=PaymentsSeeder
+```
+Run tests before you try
+```
+php artisan test
 ```
 ## Usage
 
