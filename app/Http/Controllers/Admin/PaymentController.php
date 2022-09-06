@@ -23,19 +23,19 @@ class PaymentController extends Controller
 
     public function create(Request $request)
     {
-        $bill = Payment::create($request->all());
-        return response()->json($bill, 201);
+        $payment = Payment::create($request->all());
+        return response()->json($payment, 201);
     }
 
     public function update(Request $request, $sn)
     {
-        $bill = Payment::find($sn)->update($request->all);
-        return response()->json($bill);
+        $payment = Payment::find($sn)->update($request->all);
+        return response()->json($payment);
     }
 
     public function delete($sn)
     {
-        $bill = Payment::find($sn)->delete();
+        $payment = Payment::find($sn)->delete();
         return response()->json(200);
     }
 }

@@ -15,17 +15,15 @@ class PaymentCompleted implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $payment;
     protected $request;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($payment)
+    public function __construct($request)
     {
-        $this->payment = new Payment;
-        $this->request = $payment;
+        $this->request = $request;
     }
 
     /**
@@ -35,8 +33,6 @@ class PaymentCompleted implements ShouldQueue
      */
     public function handle()
     {
-        Log::info('Payment created', $this->request);
-        $this->payment = $this->request;
-        $this->payment->save();
+        Payment::create($this->request);
     }
 }

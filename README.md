@@ -69,6 +69,10 @@ abcd1234
 ```
 
 Bills page allow to edit the bill by click on data. 
+<br/>
+
+#### If you found navbar missing and dont have login please right click inspect got Application clear the cocal storage.
+
 
 ## Comment
 Finally, I hope to be fortunate to be part of your team.

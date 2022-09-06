@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\MeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\BillReportExportController;
 use App\Http\Controllers\IPayNowController;
 
 
@@ -54,6 +55,7 @@ Route::prefix('/v1/admin')->group(function () {
     Route::get('/bills', [BillController::class, 'get']);
     Route::patch('/bills/{sn}', [BillController::class, 'update']);
     Route::get('/payments', [PaymentController::class, 'get']);
+    Route::get('/bills/reports/export/{format}', [BillReportExportController::class, 'export']);
 
 
 });

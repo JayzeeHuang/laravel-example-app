@@ -8,6 +8,22 @@ use Tests\TestCase;
 
 class PaymentTest extends TestCase
 {
+
+    protected $payment;
+
+    public function setUp() :void
+    {
+        parent::setUp();
+        $this->payment = [
+            'gateway' => 'IPayNow',
+            'transaction_ref_no' => 456421321654,
+            'transaction_status' => 'Completed',
+            'payment_amount' => 18.00,
+            'paid_amount' => 18.00,
+            'currency_code' => 'NZD'
+        ];
+    }
+
     /**
      * A basic feature test example.
      *
@@ -21,11 +37,11 @@ class PaymentTest extends TestCase
     }
 
     
-    public function test_can_receive_payment()
+    public function test_can_store_payment_from_job_queue()
     {
-        $response = $this->get('/api/v1/payments/545646126461');
-
-        $response->assertStatus(404);
+        $this->postJson('/api/v1/payments/4546', $this->payment)->assertStatus(201);
+        sleep(3);
+        $this->assertDatabaseHas('payments', $this->payment);
     }
 }
 
