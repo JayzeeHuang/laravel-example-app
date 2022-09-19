@@ -1,5 +1,7 @@
 # Introduction
 
+This demonstration aims to show the ability can code in different ways and use function build-in laravel.
+
 As an officer from the government sector, I would like to have a system to generate bills and collect payments, chase the payment progress, and better understand the bill being paid or not.
 
 Based on user needs, this requires high concurrency. It is estimated that at the level of tens of millions, it will connect with third-party payment, user hierarchical authentication, and send bills by mail.
